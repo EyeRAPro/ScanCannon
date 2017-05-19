@@ -50,7 +50,7 @@ for CIDR in $(cat $1); do
 	#Start Masscan:
 	iptables -A INPUT -p tcp --dport 60000 -j DROP;
 	echo -e "\n*** Firing ScanCannon. Please keep arms and legs inside the chamber at all times ***";
-	masscan --open --banners --source-port 60000 -p0-65535 --max-rate 15000 -oB ./results/$DIRNAME/masscan.bin $CIDR; masscan --readscan ./results/$DIRNAME/masscan.bin -oL ./results/$DIRNAME/masscan-output.txt;
+	./masscan --open --banners --source-port 60000 -p0-65535 --max-rate 15000 -oB ./results/$DIRNAME/masscan.bin $CIDR; ./masscan --readscan ./results/$DIRNAME/masscan.bin -oL ./results/$DIRNAME/masscan-output.txt;
 
 	if [ ! -s ./results/$DIRNAME/masscan-output.txt ]; then
         	echo -e "\nNo IPs are up; skipping nmap. This was a big waste of time.\n"
